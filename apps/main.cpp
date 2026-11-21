@@ -1,11 +1,10 @@
-
 #include "document.hpp"
 #include <iostream>
 
 int main() {
-    ExcelReader reader;
+    JsonReader reader;
 
-    auto documents = reader.read("data/pets.xlsx");
+    auto documents = reader.read("data/pets.json");
 
     for (const auto& doc : documents) {
         std::cout << "Title: " << doc.name << '\n';

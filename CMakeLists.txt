@@ -15,8 +15,20 @@ FetchContent_Declare(OpenXLSX
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(OpenXLSX)
 
+FetchContent_Declare(
+    nlohmann_json
+    URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+
+FetchContent_MakeAvailable(nlohmann_json)
+
 add_library(search_lib src/excel_reader.cpp src/json_reader.cpp src/csv_reader.cpp)
 target_include_directories(search_lib PUBLIC include)
-target_link_libraries(search_lib PRIVATE OpenXLSX::OpenXLSX)
+target_link_libraries(search_lib
+    PRIVATE
+        OpenXLSX::OpenXLSX
+        nlohmann_json::nlohmann_json
+)
 target_compile_options(search_lib PRIVATE -Wall -Wextra)
 add_subdirectory(apps)
